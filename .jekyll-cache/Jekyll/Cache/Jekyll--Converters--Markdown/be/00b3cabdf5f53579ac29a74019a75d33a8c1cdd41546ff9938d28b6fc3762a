@@ -1,4 +1,4 @@
-I"X�<p>这些面试题包含哪些内容？这份面试题包含了 19 个模块：Java 基础、容器、多线程、反射、对象拷贝、Java Web、异常、网络、设计模式、Spring/Spring MVC、Spring Boot/Spring Cloud、Hibernate、Mybatis、RabbitMQ、Kafka、Zookeeper、MySql、Redis、JVM 等。</p>
+I"��<p>这些面试题包含哪些内容？这份面试题包含了 19 个模块：Java 基础、容器、多线程、反射、对象拷贝、Java Web、异常、网络、设计模式、Spring/Spring MVC、Spring Boot/Spring Cloud、Hibernate、Mybatis、RabbitMQ、Kafka、Zookeeper、MySql、Redis、JVM 等。</p>
 
 <h1 id="一java-基础">一、Java 基础</h1>
 
@@ -64,7 +64,9 @@
 
 <p>堆：所有的对象（包括自己定义对象和字符串对象）</p>
 
-<p>方法区：所有的class和static变量</p>
+<p>方法区：1.7之前所有的class和static变量 1.7之后存放在堆区</p>
+
+<p>Class对象和static变量是存放在堆区的，不是方法区，<strong>类的元数据（元数据并不是类的Class对象！Class对象是加载的最终产品，类的方法代码，变量名，方法名，访问权限，返回值等等都是在方法区的）</strong>才是存在方法区的</p>
 
 <h3 id="什么是常量池"><strong>什么是常量池？</strong></h3>
 
