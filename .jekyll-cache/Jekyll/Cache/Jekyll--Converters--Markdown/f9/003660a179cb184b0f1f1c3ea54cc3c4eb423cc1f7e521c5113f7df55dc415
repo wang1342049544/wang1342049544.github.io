@@ -1,4 +1,4 @@
-I"��<p>这些面试题包含哪些内容？这份面试题包含了 19 个模块：Java 基础、容器、多线程、反射、对象拷贝、Java Web、异常、网络、设计模式、Spring/Spring MVC、Spring Boot/Spring Cloud、Hibernate、Mybatis、RabbitMQ、Kafka、Zookeeper、MySql、Redis、JVM 等。</p>
+I":�<p>这些面试题包含哪些内容？这份面试题包含了 19 个模块：Java 基础、容器、多线程、反射、对象拷贝、Java Web、异常、网络、设计模式、Spring/Spring MVC、Spring Boot/Spring Cloud、Hibernate、Mybatis、RabbitMQ、Kafka、Zookeeper、MySql、Redis、JVM 等等。</p>
 
 <h1 id="一java-基础">一、Java 基础</h1>
 
@@ -10,21 +10,39 @@
 
 <h3 id="2-和-equals-的区别是什么"><strong>2.== 和 equals 的区别是什么</strong></h3>
 
-<p>①基本数据类型：只能用==运算符，比较的是值</p>
+<p><strong>==操作符的作用</strong></p>
 
-<p>字面量引用类型： 比如 String x = “张三”  == 和equal 比较的都是值</p>
+<p>1、用于基本数据类型的比较，局部变量存在于栈中，<strong>类变量（静态成员变量</strong>）和成员变量存在于堆中</p>
 
-<p>②引用数据类型：</p>
+<p>public static int a = 1;// <strong>类变量</strong></p>
 
-<p><strong>特殊的类</strong>： 如 String s1 =new String(“abc”); 使用==比较的是对象的内存地址，使用equal比较的是内容</p>
+<p>public int b = 2;// <strong>成员变量</strong></p>
 
-<p><strong>普通的类：</strong> 如  Person4 p1 =new Person4()   == 和equal 比较的都是对象的内存地址</p>
+<p>​	public void method() {</p>
+
+<p>​	 int c = 3;// <strong>局部变量</strong></p>
+
+<p>​	int d = 3;// <strong>局部变量</strong></p>
+
+<p>c = 4;</p>
+
+<p>}</p>
+
+<p><strong>2.equals的作用：</strong></p>
+
+<p>用于判断两个变量是否是对同一个对象的引用，即堆中的内容是否相同，返回值为布尔类型</p>
+
+<p><strong>3.特殊的类（string）</strong>String类型比较不同对象内容是否相同，应该用equals，因为==用于比较引用类型和比较基本数据类型时具有不同的功能。</p>
+
+<p>​     String x = “张三”    String x1 = “张三”       <strong>== 和equal 判断的内存地址</strong></p>
+
+<p>​    String s1 =new String(“abc”);String s2=new String(“abc”);  <strong>==判断对象的内存地址，使用equal判断的是值abc</strong></p>
 
 <p><strong>概念：</strong>String x = “张三” ，Java 虚拟机会将其分配到常量池中，在常量池中检索是否已经有值,没有就创建一个，有那么就将值的地址赋给变量，此过程创建了1个对象</p>
 
 <p><strong>概念：</strong>String str=new String(“abc”);str在栈中，new的对象都存在在堆中，因此，new String(“abc”)在堆中创建了对象，并将其赋值给str，即 String str = ，这么一来，在字符串常量池中存在字符串“abc”，在堆中存在对象“abc”，此过程创建了2个对象</p>
 
-<p><strong>概念：</strong> Person  p =new  Person()  定义了一个person类的对象p并对它进行实例化， 这个 p所在栈中,比如分配的内存地址是AG84300 ,存的就是实例化对象在堆当中的地址，比如Be95000</p>
+<p><strong>概念：</strong> Person  p =new  Person()  定义了一个person类的对象p并对它进行实例化， 这个 p所在栈中,比如分配的内存地址是AG84300 ,<strong>存</strong>的就是实例化对象在堆当中的地址，比如Be95000</p>
 
 <hr />
 
@@ -46,7 +64,9 @@
 
 <p>堆：所有的对象（包括自己定义对象和字符串对象）</p>
 
-<p>方法区：所有的class和static变量</p>
+<p>方法区：1.7之前所有的class和static变量 1.7之后存放在堆区</p>
+
+<p>Class对象和static变量是存放在堆区的，不是方法区，<strong>类的元数据（元数据并不是类的Class对象！Class对象是加载的最终产品，类的方法代码，变量名，方法名，访问权限，返回值等等都是在方法区的）</strong>才是存在方法区的</p>
 
 <h3 id="什么是常量池"><strong>什么是常量池？</strong></h3>
 
@@ -139,7 +159,9 @@
 
 <hr />
 
-<h3 id="12成员变量-和-局部变量">12成员变量 和 局部变量</h3>
+<h3 id="12类变量-和-成员变量--局部变量">12类变量 和 成员变量  局部变量</h3>
+
+<p>局部变量存在于栈中，<strong>类变量（静态成员变量</strong>）和<strong>成员变量</strong>存在于堆中</p>
 
 <p>方法体外:成员变量</p>
 
@@ -717,6 +739,9 @@
 <hr />
 
 <h3 id="2-动态代理是什么有哪些应用">2. 动态代理是什么？有哪些应用？</h3>
+
+<p>专门完成代理的操作类，是所有动态代理类的父亲，通过此类为一个或者多个接口动态的生成实现类
+解释：一个java项目，其中100Java类，每个java有是10个方法，总共1000个方法，现在我需要在每个Java方法加上2句话，在方法执行前输出这个方法开始执行，在方法执行后输出这个方法已经完成</p>
 
 <hr />
 
